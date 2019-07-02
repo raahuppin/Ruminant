@@ -1,0 +1,1 @@
+SELECT * FROM datenbank_eshop.produkte;
