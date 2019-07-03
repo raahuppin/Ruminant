@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/static/styleLogin.css" type="text/css" />
+        <title>Anmeldung</title>
+    </head>
+    <body>
+		<div id="wrapper">
+			<div id="header">Header</div>
+			<div id="position">Position</div>
+			<div id="navigation">Navigation</div>
+			<div id="content">
+				<h1>Anmeldung</h1>
+				<p>
+					Bitte geben Sie Vorname und Passwort ein
+				</p>
+                <form method="POST" action="">
+					<div class="formline" >
+						<label>Vorname</label>
+						<input type="text" name="username" />
+					</div>
+					
+                    <div class="formline" >
+						<label>Passwort</label>
+						<input type="password" name="password" />
+					</div>
+					<br />
+					<input type="submit" name="eingabe" value="Absenden" />
+				</form>
+			</div>
+            <div id="message"> {{ message }} </div>
+		</div>
+    </body>
+</html>
