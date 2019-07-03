@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mysqldb import MySQL
 
-
+import sys
 app=Flask(__name__)
 
 app.secret_key="wdjiwjdiwjd"
@@ -15,10 +15,59 @@ app.config['MYSQL_HOST'] = 'localhost'
 mysql = MySQL(app)
 @app.route("/")
 def eShop():
+    
     return redirect(url_for('login',))
 
 @app.route("/home",methods=['GET','POST'])
 def Home():
+    
+        
+    i=1
+    j=1
+    k=1
+    
+    namelist={}
+    ratinglist={}
+    price={}
+    usernames={}
+    prodcursor = mysql.connection.cursor()
+    ratingcursor = mysql.connection.cursor()
+    pricecursor = mysql.connection.cursor()
+    idcursor = mysql.connection.cursor()
+    prodcursor.execute('''SELECT Name FROM Produkte ''')
+    ratingcursor.execute('''SELECT Bewertung FROM Produkte ''')
+    pricecursor.execute('''SELECT Preis FROM Produkte ''')
+    
+    
+    
+    products=prodcursor.fetchall()
+    ratings=ratingcursor.fetchall()
+    prices=pricecursor.fetchall()
+    
+    for prod in products:
+        
+        namelist[i]=prod
+        
+        
+        i=i+1
+    for rat in ratings:
+        ratinglist[j]=rat
+        j=j+1
+    for pric in prices:
+        price[k]=pric
+        k=k+1
+    mysql.connection.commit()
+    prodcursor.close
+    ratingcursor.close
+    pricecursor.close
+    return render_template('home.html',names=namelist,ratings=ratinglist, prices=prices)
+
+@app.route("/checkout",methods=['GET','POST'])
+def Warenkorb():
+    return(render_template('Check-out_seite.html'))
+
+@app.route("/shop",methods=['GET','POST'])
+def Waren():
     i=1
     j=1
     k=1
@@ -54,26 +103,7 @@ def Home():
     prodcursor.close
     ratingcursor.close
     pricecursor.close
-    return render_template('home.html',names=namelist,ratings=ratinglist, prices=prices)
-
-@app.route("/checkout",methods=['GET','POST'])
-def Warenkorb():
-    return("")
-
-@app.route("/shop",methods=['GET','POST'])
-def Waren():
-    i=1
-    list={}
-    pdcursor = mysql.connection.cursor()
-    pdcursor.execute('''SELECT Name FROM Produkte ''')
-    products=pdcursor.fetchall()
-    for p in products:
-        
-        list[i]=p
-        i+1
-    mysql.connection.commit()
-    pdcursor.close
-    return render_template('shop.html',names=list)
+    return render_template('shop.html',names=namelist,ratings=ratinglist, prices=prices)
 @app.route("/login",methods=['GET','POST'])
 def login():
     message=''
