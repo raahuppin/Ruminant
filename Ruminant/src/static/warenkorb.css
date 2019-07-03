@@ -1,0 +1,50 @@
+.warenkorb{
+    width: 20%;
+    height: 100%;
+    margin-top: 0px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: #ecd9c5;
+    float: right;
+}
+
+.warenkorb h2{
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+    font-size: 17px;
+	text-decoration: none;
+    color: white;
+    background-color: #4d3319;
+}
+.warenkorb table{
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.warenkorb thead td{
+    font-weight: bold;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.warenkorb tfoot{
+    font-weight: bold;
+    border-top: 2px solid black;
+}
+
+.warenkorb button{
+    float: right;
+	padding: 6px 10px;
+	margin-top: 8px;
+	margin-right: 8px;
+	background-color: #ccc;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+}
+
+.warenkorb button:hover{
+    background-color: #ddd;
+	color: #ff9900;
+}

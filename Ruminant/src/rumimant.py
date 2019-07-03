@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mysqldb import MySQL
 
-import sys
-
 
 app=Flask(__name__)
 
