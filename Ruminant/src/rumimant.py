@@ -21,7 +21,42 @@ def eShop():
 
 @app.route("/home",methods=['GET','POST'])
 def Home():
-    return render_template('home.html')
+    i=1
+    j=1
+    k=1
+    namelist={}
+    ratinglist={}
+    price={}
+    prodcursor = mysql.connection.cursor()
+    ratingcursor = mysql.connection.cursor()
+    pricecursor = mysql.connection.cursor()
+    prodcursor.execute('''SELECT Name FROM Produkte ''')
+    ratingcursor.execute('''SELECT Bewertung FROM Produkte ''')
+    pricecursor.execute('''SELECT Preis FROM Produkte ''')
+    products=prodcursor.fetchall()
+    ratings=ratingcursor.fetchall()
+    prices=pricecursor.fetchall()
+    print(products,sys.stdout.flush())
+    print(prices,sys.stdout.flush())
+    print(ratings,sys.stdout.flush())
+    print(prices,sys.stdout.flush())
+    for prod in products:
+        
+        namelist[i]=prod
+        
+        
+        i=i+1
+    for rat in ratings:
+        ratinglist[j]=rat
+        j=j+1
+    for pric in prices:
+        price[k]=pric
+        k=k+1
+    mysql.connection.commit()
+    prodcursor.close
+    ratingcursor.close
+    pricecursor.close
+    return render_template('home.html',names=namelist,ratings=ratinglist, prices=prices)
 
 @app.route("/checkout",methods=['GET','POST'])
 def Warenkorb():
@@ -29,26 +64,41 @@ def Warenkorb():
 
 @app.route("/shop",methods=['GET','POST'])
 def Waren():
-    return render_template('shop.html')
-
+    i=1
+    list={}
+    pdcursor = mysql.connection.cursor()
+    pdcursor.execute('''SELECT Name FROM Produkte ''')
+    products=pdcursor.fetchall()
+    for p in products:
+        
+        list[i]=p
+        i+1
+    mysql.connection.commit()
+    pdcursor.close
+    return render_template('shop.html',names=list)
 @app.route("/login",methods=['GET','POST'])
 def login():
     message=''
     if request.method=='POST':
         session['uname']=request.form['username']
         session['pword']=request.form['password']
-        cursor = mysql.connection.cursor()
-        cursor.execute('''SELECT passwort FROM Kunden where username like"'''+session.get('uname')+'''";''')
-        logindata=cursor.fetchone()
+        pwcursor = mysql.connection.cursor()
+        pwcursor.execute('''SELECT passwort FROM Kunden where username like"'''+session.get('uname')+'''";''')
+        logindata=pwcursor.fetchone()
         mysql.connection.commit()
-        cursor.close
+        pwcursor.close
         
         if logindata is not None:
             for password in logindata:
                 
                 
                 if password==session['pword']:
-                    loggedIn="true"
+                    pidcursor = mysql.connection.cursor()
+                    pidcursor.execute('''SELECT idKunden FROM Kunden where username like"'''+session.get('uname')+'''";''')
+                    id=pidcursor.fetchone()
+                    loggedIn=id
+                    mysql.connection.commit()
+                    pidcursor.close
                     
                     return redirect(url_for('Waren'))
     return render_template('Login.html',message=message)
