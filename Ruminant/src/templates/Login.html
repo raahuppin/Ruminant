@@ -2,14 +2,24 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/static/styleLogin.css" type="text/css" />
+        <link rel="stylesheet" href="/static/mainContent.css"/>
+        <link rel="stylesheet" href="/static/navigationBar.css"/>
+        <link rel="stylesheet" href="/static/warenkorb.css"/>
         <title>Anmeldung</title>
     </head>
     <body>
-		<div id="wrapper">
-			<div id="header">Header</div>
-			<div id="position">Position</div>
-			<div id="navigation">Navigation</div>
+        <div class="navigationBar">
+            <img src="/static/images/logo.png" alt="logo">
+            <a href="home">Home</a>
+            <a href="shop">Shop</a>
+            <div class="search-container">
+                <form>
+                    <input type="text" placeholder= "Search.." name="search">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <a class="active" href="login">Login</a>
+        </div>
 			<div id="content">
 				<h1>Anmeldung</h1>
 				<p>
@@ -30,6 +40,5 @@
 				</form>
 			</div>
             <div id="message"> {{ message }} </div>
-		</div>
     </body>
 </html>

@@ -1,16 +1,17 @@
 .navigationBar{
 	position: sticky;
+    height: 50px;
 	top: 0px;
 	border: 0px;
 	margin: 0px;
 	padding: 0px;
 	background-color: #4d3319;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .navigationBar img[alt="logo"]{
 	float: left;
-	height: 49px;
+	height: 100%;
 }
 .navigationBar a{
 	float: left;
@@ -33,7 +34,7 @@
 
 .navigationBar a.active{
 	background-color: #ff9900;
-	color: #white;
+	color: white;
 }
 
 .navigationBar .search-container{
@@ -49,17 +50,5 @@
 
 .navigationBar .search-container button{
 	float: right;
-	padding: 6px 10px;
-	margin-top: 8px;
-	margin-right: 8px;
-	background-color: #ccc;
-	font-size: 17px;
-	border: none;
-	cursor: pointer;
-}
-
-.navigationBar .search-container button:hover{
-	background-color: #ddd;
-	color: #ff9900;
 }
 
